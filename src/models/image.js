@@ -24,7 +24,7 @@ module.exports = (sequelize,DataTypes)=> {
                 notNull:{msg: 'cette propriete est requise'}
             }
         },
-        id_post:{
+        id_posts:{
             type: DataTypes.INTEGER,
             allowNull:false,
             validate: {

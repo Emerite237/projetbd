@@ -26,18 +26,20 @@ app
 .use(bodyParser.urlencoded({extended:true}))
 
 //ici, nous placerons nos futurs points de terminaison. 
-require('./src/routes/connexion')(app)
-require('./src/routes/register')(app)
-require('./src/routes/find_posts')(app)
-require('./src/routes/ville')(app)
-require('./src/routes/region')(app)
-require('./src/routes/create_post')(app);
-require('./src/routes/update_post')(app);
-require('./src/routes/delete_post')(app);
+require('./src/routes/connexion')(app)      //http://localhost:3000/api/login
+require('./src/routes/register')(app)        //
+require('./src/routes/find_posts')(app)       //http://localhost:3000/api/post
+require('./src/routes/find_images')(app)       //http://localhost:3000/api/img
+require('./src/routes/ville')(app)             //
+require('./src/routes/region')(app)             //
+require('./src/routes/create_post')(app);       //http://localhost:3000/api/post
+require('./src/routes/create_image')(app);      //http://localhost:3000/api/img
+require('./src/routes/update_post')(app);       ///http://localhost:3000/api/posts/:id
+require('./src/routes/delete_post')(app);       //http://localhost:3000/api/posts/:id
 
 
 app.get('/', (req, res) => {
-    res.send(console.log(req.session.utilisateur.nom))
+   //  res.send(console.log(req.session.utilisateur.nom))
  })
 
 //On ajoute la gestion des erreurs 404
