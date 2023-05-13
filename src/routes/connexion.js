@@ -1,7 +1,4 @@
 const { utilisateur } = require('../db/sequelize')
-const { ValidationError } = require('sequelize')
-const cookiesParser = require('cookie-parser')
-const session = require('express-session')
 const bcrypt = require('bcrypt')
   
 module.exports = (app) => {
@@ -22,13 +19,14 @@ module.exports = (app) => {
             return res.status(404).json({message})
           }
           const message = 'One user found'
-          req.session.utilisateur = utilisateur
-          res.redirect("/api/home")
+          req.session.user=utilisateur
+          return res.json({message, data:utilisateur})
         })
       })
       .catch(error => {
         const message = `L'utilisateur n'a pas pu être récupéré. Réessayez dans quelques instants.`
         res.status(500).json({message, data: error})
+        console.log(error)
       })
   })
 }

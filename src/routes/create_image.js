@@ -1,5 +1,7 @@
 const {img}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
+const {UniqueConstraintError}=require('sequelize')
+
 
 module.exports= (server) => {
    server.post('/api/img',(req,res)=>{
@@ -17,6 +19,7 @@ module.exports= (server) => {
        }
        const message="le img n'a pas pue etre ajouter"
        res.status(500).json({message, data:error})
+       console.log(error)
        
     })
     })

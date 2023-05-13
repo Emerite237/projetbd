@@ -4,17 +4,18 @@ const postModel = require('../models/post')
 const typeModel = require('../models/type')
 const villeModel = require('../models/ville')
 const regionModel = require('../models/region')
+const categoriemodel=require('../models/categorie')
 
 const { Sequelize, DataTypes } = require('sequelize')
 
   
 const sequelize = new Sequelize('bd', 'root', '', {
-  host: 'localhost',
-  dialect: 'mariadb',
+  host: 'bd.sqlite',
+  dialect: 'sqlite',
   dialectOptions: {
     timezone: 'Etc/GMT-2',
   },
-  logging: false
+  logging: true
 })
 
 const post=postModel(sequelize,DataTypes)
@@ -23,6 +24,7 @@ const utilisateur = userModel(sequelize, DataTypes)
 const type = typeModel(sequelize, DataTypes)
 const ville = villeModel(sequelize, DataTypes)
 const region = regionModel(sequelize, DataTypes)
+const categorie=categoriemodel(sequelize,DataTypes)
   
 
 const initDb = () => {
@@ -74,5 +76,5 @@ ville.belongsTo(region,{
 
 
 module.exports = { 
- initDb,utilisateur, post, img, type, ville, region
+ sequelize,utilisateur, post, img, type, ville, region,categorie
 }

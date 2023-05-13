@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       lib_type: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique:{
+          msg:'ce type est deja enregistrer'
+        },
         validate: {
           notEmpty: {msg: 'Le libélé du type ne doit pas être vide'},
           notNull: {msg: 'Le libelé du type est une propriété requise'}

@@ -13,6 +13,7 @@ module.exports = (sequelize,DataTypes)=> {
         titre:{
             type: DataTypes.STRING,
             allowNull: false,
+            unique:true,
             validate:{
                 notEmpty:{msg:'le titre est obligatoire'},
                 notNull:{msg: 'cette propriete est requise'}

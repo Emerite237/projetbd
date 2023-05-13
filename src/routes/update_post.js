@@ -2,7 +2,7 @@ const { post }= require('../db/sequelize')
 const {ValidationError}=require('sequelize')
 
 module.exports =(app) =>{
-    app.put('/api/posts/:id',(req,res) =>
+    app.put('/api/post/modifier/:id',(req,res) =>
     {
         const id= req.params.id
 
