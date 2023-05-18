@@ -68,7 +68,7 @@ module.exports = (sequelize,DataTypes)=> {
             }
         },
         actif:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.BOOLEAN,
             allowNull:false,
             validate: {
                 isInt: {msg:'id  est un  entier'},

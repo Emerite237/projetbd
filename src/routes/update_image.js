@@ -4,7 +4,7 @@ const {ValidationError}=require('sequelize')
 
 
 module.exports =(app) =>{
-    app.put('/api/imgs/:id',(req,res) =>
+    app.put('/api/imgs/:id', cors(),(req,res) =>
     {
         const id= req.params.id
 

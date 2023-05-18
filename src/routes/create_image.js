@@ -4,7 +4,7 @@ const {UniqueConstraintError}=require('sequelize')
 
 
 module.exports= (server) => {
-   server.post('/api/img',(req,res)=>{
+   server.post('/api/img', cors(),(req,res)=>{
       img.create(req.body)
        .then(img =>{
            const message ='le img a bien ete ajouter.'

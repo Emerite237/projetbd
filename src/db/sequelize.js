@@ -5,6 +5,7 @@ const typeModel = require('../models/type')
 const villeModel = require('../models/ville')
 const regionModel = require('../models/region')
 const categoriemodel=require('../models/categorie')
+const verificationmodel=require('../models/verification')
 
 const { Sequelize, DataTypes } = require('sequelize')
 
@@ -25,7 +26,7 @@ const type = typeModel(sequelize, DataTypes)
 const ville = villeModel(sequelize, DataTypes)
 const region = regionModel(sequelize, DataTypes)
 const categorie=categoriemodel(sequelize,DataTypes)
-  
+const verification=verificationmodel(sequelize,DataTypes)  
 
 const initDb = () => {
   return sequelize.sync({force: true}).then(_ => {
@@ -76,5 +77,5 @@ ville.belongsTo(region,{
 
 
 module.exports = { 
- sequelize,utilisateur, post, img, type, ville, region,categorie
+ sequelize,utilisateur, post, img, type, ville, region,categorie,verification
 }

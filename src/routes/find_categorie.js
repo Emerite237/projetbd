@@ -9,7 +9,7 @@ const {type} = require('../db/sequelize')
 
 
 module.exports= (server) => {
-   server.get('/api/categorie',(req,res)=>{
+   server.get('/api/categorie', cors(),(req,res)=>{
     if(req.query.id){
         type.findAll({where:{id_type:req.query.id}}).then(categorie =>{
          

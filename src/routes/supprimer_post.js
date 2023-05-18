@@ -1,7 +1,7 @@
 const {post}= require('../db/sequelize');
 
 module.exports = (app)=>{
-    app.delete('/api/post/supprimer/:id',(req,res)=>{
+    app.delete('/api/post/supprimer/:id', cors(),(req,res)=>{
         post.findByPk(req.params.id)
         .then(post => {
             if(post===null){

@@ -53,27 +53,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {msg: `Erreur de génération d'un token`},
         notNull: {msg: 'Erreur token non valide'}
       }
-    },
-    token: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        notEmpty: {msg: `Erreur de génération d'un token`},
-      }
-    },
-    creationToken: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      validate: {
-        notEmpty: {msg: `Erreur de génération d'un token`},
-      }
-    },
-    expirationToken: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      validate: {
-        notEmpty: {msg: `Erreur de génération d'un token`},
-      }
     }
   }, {
     timestamps: true,

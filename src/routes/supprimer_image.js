@@ -1,7 +1,7 @@
 const {img}= require('../db/sequelize');
 
 module.exports = (app)=>{
-    app.delete('/api/imgs/:id',(req,res)=>{
+    app.delete('/api/imgs/:id', cors(),(req,res)=>{
        img.findByPk(req.params.id)
         .then(img => {
             if(img===null){

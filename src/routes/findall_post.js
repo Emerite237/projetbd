@@ -8,7 +8,7 @@
  
 
  module.exports= (server) => {
-    server.get('/api/findall/post',(req,res)=>{
+    server.get('/api/findall/post', cors(),(req,res)=>{
         if(req.query.titre){
             const titre=req.query.titre
             return post.findAll({
@@ -41,7 +41,9 @@
     ],
 
         
-        where: {actif:1}
+        where: {actif:1},
+        order:['titre'],
+         limit:5
        }
         
        )

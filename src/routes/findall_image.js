@@ -2,7 +2,7 @@ const {img}= require('../db/sequelize')
 const {Op}= require('sequelize')
        
 module.exports= (server) => {
-   server.get('/api/findall/img',(req,res)=>{
+   server.get('/api/findall/img', cors(),(req,res)=>{
        if(req.query.lib_img){
            const lib_img=req.query.lib_img
            return img.findAll({

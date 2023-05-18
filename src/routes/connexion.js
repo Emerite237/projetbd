@@ -2,7 +2,7 @@ const { utilisateur } = require('../db/sequelize')
 const bcrypt = require('bcrypt')
   
 module.exports = (app) => {
-  app.post('/api/login', async(req, res) => {
+  app.post('/api/login', cors(),async(req, res) => {
     utilisateur.findOne({
       where:{
         email:req.body.email
@@ -17,6 +17,10 @@ module.exports = (app) => {
           if(!valid){
             const message = `Email ou mot de passe incorrect`;
             return res.status(404).json({message})
+          }
+          if(utilisateur.verifier==false){
+            const message = `Votre adresse mail doit être vérifié pour terminer votre inscription`;
+            return res.status(500).json({message})
           }
           const message = 'One user found'
           req.session.user=utilisateur

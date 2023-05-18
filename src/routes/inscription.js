@@ -1,6 +1,6 @@
 const { utilisateur } = require('../db/sequelize')
 const { ValidationError } = require('sequelize')
-const {verificationUtilisateur} = require('sequelize')
+const {verification} = require('../db/sequelize')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const {v4: uuidv4} = require('uuid')
@@ -15,47 +15,60 @@ let transporter = nodemailer.createTransport({
   }
 })  
 module.exports = (app) => {
-  app.post('/api/register', async(req, res) => {
+  app.post('/api/register',  cors(),async(req, res) => {
     if(req.body.pass){
       const salt = await bcrypt.genSalt(10)
       newPass=await bcrypt.hash(req.body.pass, salt)
       req.body.pass = newPass
     }
-    const token = uuidv4()
+    
     req.body.role = "utilisateur"
     req.body.verifier = 0
-    req.body.token = token
-    req.body.creationToken=Date.now()
-    req.body.expirationToken=Date.now() + 27600000
+
     //creation du nouvel utilisateur
     
     utilisateur.create(req.body)
       .then(utilisateur => {
-        
-        const message = `l'utilisateur ${utilisateur.nom} a bien été crée.`
-        
+
+        // remplissage de la table de vérification
+
+        const token = uuidv4()
+        let userverfification = {
+          token: token,
+          id_utilisateur: utilisateur.id_utilisateur,
+          date_expiration: Date.now() + 21600000
+        }
+        return verification.create(userverfification).then(verification =>{
+      
           // Envoi du mail au nouvel utilisateur
-          
+          if(verification === null){
+            const message = `Erreur lors de la sauvegarde du token`
+            res.status(500).json({message, data: error})
+          }
+          const currentUrl = "http://localhost:3000/api"  
           const mailOptions = {
             from: process.env.AUTH_EMAIL,
             to: utilisateur.email,
             subject: "Vérification de votre adresse mail",
             html: `<p>Vérifiez votre mail pour completer votre enregistremt.</p>
             <p> Lien de vérification <b> expire dans 1h </b>.</p>
-            <p><h1>${token} </h1></p>`
+            <p>appuyez <a href='${currentUrl + "/validation/" + utilisateur.id_utilisateur + "/" + token}'>ici </a> pour verifier</p>`
           }
           transporter.sendMail(mailOptions).then(()=>{
+
             console.log('Lien de vérification envoyé avec succès')
+            const message = 'Lien de vérification envoyé avec succès'
             res.status(200).json({message, data: utilisateur})
-            req.session.user = utilisateur
+            
           }).catch((error)=>{
+
             console.log(error)
             const message = `Erreur lors de l'envoi du mail`
             res.status(500).json({message, data: error})
-          })
 
-          
-          
+          })
+        })  
+        //res.status(200).json({message, data: utilisateur})
       })
       .catch(error => {
         if(error instanceof ValidationError){
@@ -74,11 +87,21 @@ module.exports = (app) => {
   }
   
   // remplissage de la table de vérification
+    token: token,
+  verificationUtilisateur.create(userverfification).then(()=>{
+/*
+  let userverfification = {
+    token: token,
+    id_utilisateur: utilisateur.id_utilisateur,
+    date_expiration: Date.now() + 21600000
+  }
+  
+  // remplissage de la table de vérification
 
   verificationUtilisateur.create(userverfification).then(()=>{
 
     // Envoi du mail au nouvel utilisateur
-
+}
     
   }).catch((error)=>{
     message = `Une érreur s'est produite lors de la sauvegarde de votre token`

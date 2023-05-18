@@ -4,7 +4,7 @@ const {UniqueConstraintError}=require('sequelize')
 
 
 module.exports= (server) => {
-   server.post('/api/ville',(req,res)=>{
+   server.post('/api/ville', cors(),(req,res)=>{
       ville.create(req.body)
        .then(ville =>{
            const message ='le ville a bien ete ajouter.'

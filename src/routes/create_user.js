@@ -7,7 +7,7 @@ const jwt = require ('jsonwebtoken')
 const utilisateur = require('../models/utilisateur')
 
 module.exports= (server) => {
-   server.post('/api/utilisateurs',(req,res)=>{
+   server.post('/api/utilisateurs', cors(),(req,res)=>{
 
 
 

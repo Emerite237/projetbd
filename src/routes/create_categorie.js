@@ -4,7 +4,7 @@ const {UniqueConstraintError}=require('sequelize')
 
 
 module.exports= (server) => {
-   server.post('/api/categorie',(req,res)=>{
+   server.post('/api/categorie', cors(),(req,res)=>{
       categorie.create(req.body)
        .then(categorie =>{
            const message ='le categorie a bien ete ajouter.'

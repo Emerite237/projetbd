@@ -1,12 +1,23 @@
 const {post}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
+const posts=require('../models/post')
 
 
 
 module.exports= (server) => {
-   server.post('/api/post',(req,res)=>{
-      post.create(req.body)
+   server.post('/api/post', cors(),(req,res)=>{
+    posts.actif=0
+    posts.titre=req.body.titre
+    posts.contenu=req.body.contenu
+    posts.adresse=req.body.adresse
+    posts.longitude=req.body.longitude
+    posts.latitude=req.body.latitude
+    
+    posts.id_type=req.body.id_type
+    posts.id_ville=req.body.id_ville
+    posts.id_utilisateur=req.body.id_utilisateur
+      post.create(posts)
        .then(post =>{
            const message ='le post a bien ete ajouter.'
            res.json({message,data: post})

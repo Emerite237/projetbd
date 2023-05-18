@@ -1,7 +1,7 @@
 const {posts}= require('../db/sequelize')
 
 module.exports= (server) => {
-   server.get('/api/posts/:id',(req,res)=>{
+   server.get('/api/posts/:id', cors(),(req,res)=>{
        site.findByPk(req.params.id )
        .then(posts =>{
            const message ='le site a ete recupere.'

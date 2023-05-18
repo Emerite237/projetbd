@@ -6,6 +6,7 @@ const favicon=require('serve-favicon')
 const bodyParser=require('body-parser')
 const {sequelize} = require('./src/db/sequelize')
 const sequelizeSession = require('connect-session-sequelize')(session.Store)
+
 const cors =require('cors')
 
 
@@ -31,14 +32,18 @@ app
 .use(morgan('dev'))
 .use(bodyParser.json())
 .use(bodyParser.urlencoded({extended:true}))
-.use(cors({ origin: '*'}));
+.use(cors({ origin: '*',
+method:"GET,POST,HEAD,PUSH,DELETE,PATH" }));
 
 //ici, nous placerons nos futurs points de terminaison. 
 
 
 // point de terminaison des publication
 
-require('./src/routes/findall_post')(app)      //    http://localhost:3000/api/findall/post    
+require('./src/routes/findall_post')(app)      /*   http://localhost:3000/api/findall/post   pour afficher toutes les publications 
+                                                
+                                                    http://localhost:3000/api/findall/post?titre=le titre du site rechercher    pour des recherches plus precise
+                                               */
 require('./src/routes/create_post')(app);    //    http://localhost:3000/api/post
 require('./src/routes/update_post')(app);    //    http://localhost:3000/api/post/modifier/:id
 require('./src/routes/supprimer_post')(app);    //    http://localhost:3000/api/post/supprimer/:id
@@ -56,6 +61,7 @@ require('./src/routes/create_image')(app);   //    http://localhost:3000/api/img
 require('./src/routes/connexion')(app)       //    http://localhost:3000/api/login
 require('./src/routes/inscription')(app)     //    http://localhost:3000 /api/register
 require('./src/routes/create_user')(app);
+require('./src/routes/verification')(app)
 
 //point de terminaisons sur les types,villes,regions et categorie
 require('./src/routes/create_type')(app);       //    http://localhost:3000/api/type
