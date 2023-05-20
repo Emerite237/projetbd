@@ -1,11 +1,25 @@
 const {img}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
+const image= require('../models/images')
+const {post}= require("../db/sequelize")
+
 
 
 module.exports= (server) => {
-   server.post('/api/img', cors(),(req,res)=>{
-      img.create(req.body)
+   server.post('/api/img',async(req,res)=>{
+    var c=  await post.count();
+
+    c=c+1;
+    console.log(c)
+    image.lib_img=req.body.lib_img
+    image.path= req.body.path
+    image.id_posts=c
+    
+
+
+
+      img.create(image)
        .then(img =>{
            const message ='le img a bien ete ajouter.'
            res.json({message,data: img})

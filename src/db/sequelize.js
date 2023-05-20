@@ -1,4 +1,4 @@
-const imageModel =require('../models/image')
+
 const userModel = require('../models/utilisateur')
 const postModel = require('../models/post')
 const typeModel = require('../models/type')
@@ -6,6 +6,9 @@ const villeModel = require('../models/ville')
 const regionModel = require('../models/region')
 const categoriemodel=require('../models/categorie')
 const verificationmodel=require('../models/verification')
+var imageuploadsmodels=require('../models/imagesuploads')
+var imagemodels =require('../models/images')
+
 
 const { Sequelize, DataTypes } = require('sequelize')
 
@@ -19,8 +22,10 @@ const sequelize = new Sequelize('bd', 'root', '', {
   logging: true
 })
 
+const imagesuploads=imageuploadsmodels(sequelize,DataTypes)
+ const img=imagemodels(sequelize,DataTypes)
 const post=postModel(sequelize,DataTypes)
-const img=imageModel(sequelize,DataTypes)
+
 const utilisateur = userModel(sequelize, DataTypes)
 const type = typeModel(sequelize, DataTypes)
 const ville = villeModel(sequelize, DataTypes)
@@ -77,5 +82,5 @@ ville.belongsTo(region,{
 
 
 module.exports = { 
- sequelize,utilisateur, post, img, type, ville, region,categorie,verification
+ sequelize,utilisateur, post, img, type, ville, region,categorie,verification,imagesuploads
 }

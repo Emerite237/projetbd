@@ -1,31 +1,31 @@
-const {img}= require('../db/sequelize')
+const {imagesuploads}= require('../db/sequelize')
 const {Op}= require('sequelize')
        
 module.exports= (server) => {
-   server.get('/api/findall/img', cors(),(req,res)=>{
-       if(req.query.lib_img){
-           const lib_img=req.query.lib_img
-           return img.findAll({
-               where:{lib_img
-:{[Op.like]: `%${lib_img}%`}
+   server.get('/api/imagesuploads',(req,res)=>{
+       if(req.query.lib_imagesuploads){
+           const lib_imagesuploads=req.query.lib_imagesuploads
+           return imagesuploads.findAll({
+               where:{lib_imagesuploads
+:{[Op.like]: `%${lib_imagesuploads}%`}
            },
-           order:['lib_img'],
+           order:['lib_imagesuploads'],
            limit:4
        })
-           .then(img =>{
+           .then(imagesuploads =>{
                const message= "l'element a bien ete retrouve"
-               res.json({message,data:img})
+               res.json({message,data:imagesuploads})
            })
        }
 
 
-       img.findAll()
-       .then(img =>{
-           const message = `la liste des imgs a ete recupere.`
-           res.json({message,data: img}) 
+       imagesuploads.findAll()
+       .then(imagesuploads =>{
+           const message = `la liste des imagesuploadss a ete recupere.`
+           res.json({message,data: imagesuploads}) 
        })
        .catch (error =>{
-           const message="la liste des img n'a pas ete recupere,reesayer dans quelques instant"
+           const message="la liste des imagesuploads n'a pas ete recupere,reesayer dans quelques instant"
            res.status(500).json({message,data: error}) 
        })
    }) 

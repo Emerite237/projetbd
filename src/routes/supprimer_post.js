@@ -1,4 +1,5 @@
 const {post}= require('../db/sequelize');
+const cors=require("cors")
 
 module.exports = (app)=>{
     app.delete('/api/post/supprimer/:id', cors(),(req,res)=>{

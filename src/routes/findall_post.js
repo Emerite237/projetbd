@@ -2,7 +2,7 @@
  const {type}=require('../db/sequelize')
  const {ville}=require('../db/sequelize')
  const {Op}= require('sequelize')
- const auth= require('../auth/auth')
+ const cors= require('cors')
 
 
  
@@ -15,7 +15,8 @@
                 where:{titre:{[Op.like]: `${titre}%`}
             },
             order:['titre'],
-            limit:4
+            limit:4,
+            raw:true
         })
             .then(post =>{
                 const message= "l'element a bien ete retrouve"
@@ -43,7 +44,8 @@
         
         where: {actif:1},
         order:['titre'],
-         limit:5
+         limit:5,
+         raw:true
        }
         
        )
@@ -53,7 +55,7 @@
             let postretour={titre:"",contenu:"",image:"",}
               
        
-            res.json({message,data:post}) 
+            res.json(post) 
             
         })
         .catch (error =>{

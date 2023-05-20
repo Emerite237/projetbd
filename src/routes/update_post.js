@@ -1,6 +1,6 @@
 const { post }= require('../db/sequelize')
 const {ValidationError}=require('sequelize')
-
+const cors=require("cors")
 module.exports =(app) =>{
     app.put('/api/post/modifier/:id', cors(),(req,res) =>
     {

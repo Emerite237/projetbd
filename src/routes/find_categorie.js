@@ -3,6 +3,8 @@ const {categorie}= require('../db/sequelize')
 const {ville}=require('../db/sequelize')
 const {Op}= require('sequelize')
 const {type} = require('../db/sequelize')
+const cors=require("cors")
+
 //const auth= require('../auth/auth')
 
 

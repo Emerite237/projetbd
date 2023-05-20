@@ -1,7 +1,7 @@
 const { img }= require('../db/sequelize')
 const {ValidationError}=require('sequelize')
 
-
+const cors=require("cors")
 
 module.exports =(app) =>{
     app.put('/api/imgs/:id', cors(),(req,res) =>

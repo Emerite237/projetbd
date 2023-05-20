@@ -1,5 +1,6 @@
 const { utilisateur } = require('../db/sequelize')
 const bcrypt = require('bcrypt')
+const cors=require("cors")
   
 module.exports = (app) => {
   app.post('/api/login', cors(),async(req, res) => {

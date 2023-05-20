@@ -1,4 +1,5 @@
 const {img}= require('../db/sequelize');
+const cors=require("cors")
 
 module.exports = (app)=>{
     app.delete('/api/imgs/:id', cors(),(req,res)=>{

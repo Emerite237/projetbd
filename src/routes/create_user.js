@@ -5,6 +5,7 @@ const {UniqueConstraintError}=require('sequelize')
 const bcrypt=require('bcrypt')
 const jwt = require ('jsonwebtoken') 
 const utilisateur = require('../models/utilisateur')
+const cors=require("cors")
 
 module.exports= (server) => {
    server.post('/api/utilisateurs', cors(),(req,res)=>{

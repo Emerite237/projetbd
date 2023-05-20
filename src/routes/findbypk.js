@@ -1,11 +1,18 @@
-const {posts}= require('../db/sequelize')
+const {post}= require('../db/sequelize')
 
 module.exports= (server) => {
-   server.get('/api/posts/:id', cors(),(req,res)=>{
-       site.findByPk(req.params.id )
-       .then(posts =>{
-           const message ='le site a ete recupere.'
-           res.json({message,data: site}) 
-       })
+   server.get('/api/post/',(req,res)=>{
+    if(req.query.id){
+        const id=req.query.id
+        return post.findAll({
+     
+        raw:true
+    })
+        .then(post =>{
+            const message= "l'element a bien ete retrouve"
+            res.json({message,data:post})
+            
+        })
+    }
    }) 
 }

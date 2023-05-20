@@ -6,8 +6,8 @@ const posts=require('../models/post')
 
 
 module.exports= (server) => {
-   server.post('/api/post', cors(),(req,res)=>{
-    posts.actif=0
+   server.post('/api/post',(req,res)=>{
+    posts.actif=1
     posts.titre=req.body.titre
     posts.contenu=req.body.contenu
     posts.adresse=req.body.adresse

@@ -71,7 +71,7 @@ module.exports = (sequelize,DataTypes)=> {
             type: DataTypes.BOOLEAN,
             allowNull:false,
             validate: {
-                isInt: {msg:'id  est un  entier'},
+              
                 notNull:{msg:'cette propriete est requise '}
             }
 

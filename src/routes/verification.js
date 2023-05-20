@@ -1,5 +1,6 @@
 const {utilisateur} = require('../db/sequelize')
 const {verification} = require('../db/sequelize')
+const cors=require("cors")
 
 module.exports = (app) => {
   app.get('/api/validation/:id/:token', cors(), (req, res) => {

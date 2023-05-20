@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const {v4: uuidv4} = require('uuid')
 require('dotenv').config()
+const cors=require("cors")
 
 
 let transporter = nodemailer.createTransport({

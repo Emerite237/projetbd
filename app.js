@@ -5,6 +5,8 @@ const morgan =require('morgan')
 const favicon=require('serve-favicon')
 const bodyParser=require('body-parser')
 const {sequelize} = require('./src/db/sequelize')
+const ejs = require("ejs")
+const path= require("path")
 const sequelizeSession = require('connect-session-sequelize')(session.Store)
 
 const cors =require('cors')
@@ -17,6 +19,8 @@ const oneDay = 1000 * 60 * 60 * 24
 sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
+
+app.use("/public/data/uploads",express.static(path.join(__dirname,"/public/data/uploads")))
 app
 .use(cookiesParser())
 .use(session({
@@ -39,6 +43,7 @@ method:"GET,POST,HEAD,PUSH,DELETE,PATH" }));
 
 
 // point de terminaison des publication
+require("./src/routes/findbypk")(app)        /* http://localhost:3000/api/post/?id=1   a la place du 1 tu peux mettre n'importe quel id    */ 
 
 require('./src/routes/findall_post')(app)      /*   http://localhost:3000/api/findall/post   pour afficher toutes les publications 
                                                 
@@ -54,6 +59,14 @@ require('./src/routes/supprimer_post')(app);    //    http://localhost:3000/api/
 
 require('./src/routes/findall_image')(app)     //    http://localhost:3000/api/findall/img
 require('./src/routes/create_image')(app);   //    http://localhost:3000/api/img
+  // 
+require('./src/routes/update_image')(app);
+require('./src/routes/supprimer_image')(app);
+
+require('./src/routes/findall_image_imageuploads')(app);  // afficher a la fois les images present dans le serveur et celle qui ont des url  http://localhost:3000/api/image_imagesuploads
+
+
+require("./src/routes/uploade_image")(app);       //http://localhost:3000/api/upload
 
 // point de terminaison des utilisateurs
 
@@ -67,7 +80,7 @@ require('./src/routes/verification')(app)
 require('./src/routes/create_type')(app);       //    http://localhost:3000/api/type
 require('./src/routes/create_ville')(app);      //   http://localhost:3000/api/ville
 
-require('./src/routes/create_region')(app);  
+require('./src/routes/create_region')(app);       //   http://localhost:3000/api/region
 
 
 app.get('/', (req, res) => {

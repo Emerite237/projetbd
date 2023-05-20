@@ -1,7 +1,7 @@
 const {ville}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-
+const cors=require("cors")
 
 module.exports= (server) => {
    server.post('/api/ville', cors(),(req,res)=>{
