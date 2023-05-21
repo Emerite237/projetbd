@@ -37,7 +37,7 @@ app
 .use(bodyParser.json())
 .use(bodyParser.urlencoded({extended:true}))
 .use(cors({ origin: '*',
-method:"GET,POST,HEAD,PUSH,DELETE,PATH" }));
+methods:"GET,POST,HEAD,PUSH,DELETE,PATCH" }));
 
 //ici, nous placerons nos futurs points de terminaison. 
 

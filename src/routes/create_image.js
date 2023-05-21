@@ -4,10 +4,10 @@ const {UniqueConstraintError}=require('sequelize')
 const image= require('../models/images')
 const {post}= require("../db/sequelize")
 
-
+const cors= require('cors')
 
 module.exports= (server) => {
-   server.post('/api/img',async(req,res)=>{
+   server.post('/api/img',cors(),async(req,res)=>{
     var c=  await post.count();
 
     c=c+1;

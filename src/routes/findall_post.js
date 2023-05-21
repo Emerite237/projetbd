@@ -3,12 +3,13 @@
  const {ville}=require('../db/sequelize')
  const {Op}= require('sequelize')
  const cors= require('cors')
+ const auth= require('../auth/isAuth')
 
 
  
 
  module.exports= (server) => {
-    server.get('/api/findall/post', cors(),(req,res)=>{
+    server.get('/api/findall/post',/* auth,*/cors(),(req,res)=>{
         if(req.query.titre){
             const titre=req.query.titre
             return post.findAll({
@@ -20,7 +21,7 @@
         })
             .then(post =>{
                 const message= "l'element a bien ete retrouve"
-                res.json({message,data:post})
+                res.json(post)
                 
             })
         }
@@ -56,6 +57,7 @@
               
        
             res.json(post) 
+            console.log( req.session.user.id_utilisateur)
             
         })
         .catch (error =>{

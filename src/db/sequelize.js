@@ -19,7 +19,7 @@ const sequelize = new Sequelize('bd', 'root', '', {
   dialectOptions: {
     timezone: 'Etc/GMT-2',
   },
-  logging: true
+  logging: false
 })
 
 const imagesuploads=imageuploadsmodels(sequelize,DataTypes)
