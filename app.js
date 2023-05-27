@@ -68,7 +68,7 @@ require('./src/routes/findall_image_imageuploads')(app);  // afficher a la fois 
 
 require("./src/routes/uploade_image")(app);       //http://localhost:3000/api/upload
 require("./src/routes/findbypk_images_uploads")(app);  // http://localhost:3000//api/findbypk/image_imagesuploads/id_post
-require("./src/routes/findpk_images")(app);            // http://localhost:3000/api/img/id_post
+require("./src/routes/findpk_images")(app);            // http://localhost:3000/api/img/id_post  pour avoir une image unique 
 
 // point de terminaison des utilisateurs
 
