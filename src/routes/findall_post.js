@@ -9,8 +9,8 @@
  
 
  module.exports= (server) => {
-    server.get('/api/findall/post',/* auth,*/cors(),(req,res)=>{
-        if(req.query.titre){
+    server.get('/api/findall/post',/* auth,*/cors(),async(req,res,next)=>{
+      /*  if(req.query.titre){
             const titre=req.query.titre
             return post.findAll({
                 where:{titre:{[Op.like]: `${titre}%`}
@@ -22,12 +22,13 @@
             .then(post =>{
                 const message= "l'element a bien ete retrouve"
                 res.json(post)
+                next()
                 
             })
-        }
+        */
+try {
 
-
-       post.findAll({
+    var posts= await  post.findAll({
         include:[{
             model:type,
             as:'type_post',
@@ -50,20 +51,13 @@
        }
         
        )
-        .then(post =>{
-          
-            const message = `la liste des posts a ete recupere.`
-            let postretour={titre:"",contenu:"",image:"",}
-              
        
-            res.json(post) 
-            console.log( req.session.user.id_utilisateur)
-            
-        })
-        .catch (error =>{
-            const message="la liste des post n'a pas ete recupere,reesayer dans quelques instant"
+       res.json(posts) }
+       
+        catch (error ){
+         
             res.status(500).json({message,data: error}) 
-            console.log(error)
-        })
+            console.log(error)}
+        
     }) 
  }

@@ -53,7 +53,7 @@ require('./src/routes/create_post')(app);    //    http://localhost:3000/api/pos
 require('./src/routes/update_post')(app);    //    http://localhost:3000/api/post/modifier/:id
 require('./src/routes/supprimer_post')(app);    //    http://localhost:3000/api/post/supprimer/:id
 
-
+require('./src/routes/recherche')(app);         //    http://localhost:3000/api/search/:word
 // point de terminaison des images 
 
 
@@ -67,6 +67,8 @@ require('./src/routes/findall_image_imageuploads')(app);  // afficher a la fois 
 
 
 require("./src/routes/uploade_image")(app);       //http://localhost:3000/api/upload
+require("./src/routes/findbypk_images_uploads")(app);  // http://localhost:3000//api/findbypk/image_imagesuploads/id_post
+require("./src/routes/findpk_images")(app);            // http://localhost:3000/api/img/id_post
 
 // point de terminaison des utilisateurs
 

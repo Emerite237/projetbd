@@ -4,7 +4,7 @@ const {type} = require('../db/sequelize')
 const {ville} = require('../db/sequelize')
 
 module.exports= (server) => {
-   server.get('/api/post/:id',cors(),(req,res)=>{
+   server.get('/api/post/:id',cors(),async(req,res)=>{
 
     post.findOne({
        include:[{

@@ -17,6 +17,10 @@ module.exports= (server) => {
     posts.id_type=req.body.id_type
     posts.id_ville=req.body.id_ville
     posts.id_utilisateur= req.session.user.id_utilisateur
+    var headers = req.headers;
+
+    console.log(headers);
+  
       post.create(posts)
        .then(post =>{
            const message ='le post a bien ete ajouter.'

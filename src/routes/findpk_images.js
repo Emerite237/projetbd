@@ -6,45 +6,36 @@ module.exports= (server) => {
 
     tab=[]
     tabs=[]
-   server.get('/api/image_imagesuploads',cors(),  async(req,res)=>{
-       if(req.query.lib_imagesuploads){
-           const lib_imagesuploads=req.query.lib_imagesuploads
-           return imagesuploads.findAll({
-               where:{lib_imagesuploads
-:{[Op.like]: `%${lib_imagesuploads}%`}
-           },
-           order:['lib_imagesuploads'],
-           limit:4
-       })
-           .then(imagesuploads =>{
-               const message= "l'element a bien ete retrouve"
-               res.json({message,data:imagesuploads})
-           })
-       }
+   server.get('/api/findbypk/image/:id',cors(),  async(req,res)=>{
+     
 
-     tabs=  img.findAll()
+     tabs=  img.findAll({
+         
+      where: {id_posts:req.params.id}}
+     )
        .then(img =>{
            
            tabs=img;
            console.log(tabs)
+          
          
        }
        )
 
 
-    tab=   imagesuploads.findAll()
+     tab=   imagesuploads.findAll({
+         
+      where: {id_post:req.params.id}})
        .then(imagesuploads =>{
            const message = `la liste des imagesuploadss a ete recupere.`
            tab=imagesuploads;
            console.log(tab)
-         //  res.json({message,data: imagesuploads}) 
 
-           
-   tab=tab.concat(tabs)
+   
 
        console.log(tab)
 
-       res.json(tab)
+      res.json(tab)
 
        })
        .catch (error =>{
@@ -52,9 +43,9 @@ module.exports= (server) => {
            res.status(500).json({message,data: error}) 
        })
 
-      
+       }
       
 
      
-   }) 
+   ) 
 }
