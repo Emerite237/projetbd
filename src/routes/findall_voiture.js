@@ -1,4 +1,4 @@
-const {modele}= require('../db/sequelize')
+const {voiture}= require('../db/sequelize')
 const {type}=require('../db/sequelize')
 const {ville}=require('../db/sequelize')
 const {Op}= require('sequelize')
@@ -9,11 +9,11 @@ const auth= require('../auth/isAuth')
 
 
 module.exports= (server) => {
-   server.get('/api/findall/modele',/* auth,*/cors(),async(req,res,next)=>{
+   server.get('/api/findall/voiture',/* auth,*/cors(),async(req,res,next)=>{
    
 try {
 
-   var modeles= await  modele.findAll({
+   var voitures= await  voiture.findAll({
       
 
        
@@ -25,7 +25,7 @@ try {
        
       )
       
-      res.json(modeles) }
+      res.json(voitures) }
       
        catch (error ){
         

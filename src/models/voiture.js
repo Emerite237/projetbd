@@ -77,18 +77,6 @@ module.exports = (sequelize, DataTypes) => {
 
 
 
-marque: {
-  type: DataTypes.STRING,
-  allowNull: false,
- 
-  validate:{
-
-      notEmpty:{msg:'la marque est obligatoire'},
-      notNull:{msg: 'cette marque propriete est requise'},
-
-  }
-},
-
 categorie: {
   type: DataTypes.STRING,
   allowNull:false,

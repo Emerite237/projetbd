@@ -78,7 +78,7 @@ module.exports = (app) => {
           }
           const message = 'One user found'
           req.session.user=utilisateur
-          return res.json({message, data:utilisateur})
+          return res.json(utilisateur)
         })
       })
       .catch(error => {

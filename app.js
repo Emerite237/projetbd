@@ -51,9 +51,13 @@ require('./src/routes/create_annonce')(app);    //    http://localhost:3000/api/
 require('./src/routes/create_voiture')(app);    //    http://localhost:3000/api/voiture   permet de cree un modele de voiture 
 
 
-require('./src/routes/findall_voiture')(app)    //      http://localhost:3000/api/findall/voiture   pour afficher toutes les modeles
+require('./src/routes/findall_voiture')(app)    //      http://localhost:3000/api/findall/voiture   pour afficher toutes les voitures
 
 require('./src/routes/update_annonce')(app);    //    http://localhost:3000/api/annonce/modifier/:id  pour modifier une annnonces
+
+
+require('./src/routes/update_voiture')(app);       //    http://localhost:3000/api/voiture/modifier/:id  pour modifier les caracteristique d'une voiture
+
 
 require('./src/routes/supprimer_annonce')(app);    //    http://localhost:3000/api/annonce/supprimer/:id   pour supprimer une annonce
 
