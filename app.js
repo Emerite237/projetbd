@@ -16,13 +16,12 @@ const app =express()
 const port = 3000
 const oneDay = 1000 * 60 * 60 * 24 
 //synchronisation a la base de donnee embarque
-sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
+sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
 
 app.use("/public/data/uploads",express.static(path.join(__dirname,"/public/data/uploads")))
-app
-.use(cookiesParser())
+app.use(cookiesParser())
 .use(session({
     secret:'key that will be secret',
     resave:false,
@@ -45,13 +44,27 @@ methods:"GET,POST,HEAD,PUSH,DELETE,PATCH" }));
 // point de terminaison des publication
 require("./src/routes/findbypk")(app)        /* http://localhost:3000/api/post/?id=1   a la place du 1 tu peux mettre n'importe quel id    */ 
 
-require('./src/routes/findall_post')(app)      /*   http://localhost:3000/api/findall/post   pour afficher toutes les publications 
+                                               
+require('./src/routes/create_annonce')(app);    //    http://localhost:3000/api/annonce/:id    id c'est  celui de utilisateur  cette route permet de cree une annoce de voiture
+
+                                              
+require('./src/routes/create_modele')(app);    //    http://localhost:3000/api/modele   permet de cree un modele de voiture 
+
+
+require('./src/routes/update_annonce')(app);    //    http://localhost:3000/api/annonce/modifier/:id  pour modifier une annnonces
+
+require('./src/routes/supprimer_annonce')(app);    //    http://localhost:3000/api/annonce/supprimer/:id   pour supprimer une annonce
+
+
+require("./src/routes/uploade_image")(app);       //http://localhost:3000/api/upload   pour uploader des images
+
+
+
+
+  require('./src/routes/findall_annonce')(app)    /*   http://localhost:3000/api/findall/annonce   pour afficher toutes les annoces
                                                 
                                                     http://localhost:3000/api/findall/post?titre=le titre du site rechercher    pour des recherches plus precise
-                                               */
-require('./src/routes/create_post')(app);    //    http://localhost:3000/api/post
-require('./src/routes/update_post')(app);    //    http://localhost:3000/api/post/modifier/:id
-require('./src/routes/supprimer_post')(app);    //    http://localhost:3000/api/post/supprimer/:id
+ 
 
 require('./src/routes/recherche')(app);         //    http://localhost:3000/api/search/:word
 // point de terminaison des images 
@@ -59,30 +72,42 @@ require('./src/routes/recherche')(app);         //    http://localhost:3000/api/
 
 require('./src/routes/findall_image')(app)     //    http://localhost:3000/api/findall/img
 require('./src/routes/create_image')(app);   //    http://localhost:3000/api/img
-  // 
+  // ti
 require('./src/routes/update_image')(app);
 require('./src/routes/supprimer_image')(app);
 
 require('./src/routes/findall_image_imageuploads')(app);  // afficher a la fois les images present dans le serveur et celle qui ont des url  http://localhost:3000/api/image_imagesuploads
 
 
-require("./src/routes/uploade_image")(app);       //http://localhost:3000/api/upload
 require("./src/routes/findbypk_images_uploads")(app);  // http://localhost:3000//api/findbypk/image_imagesuploads/id_post
 require("./src/routes/findpk_images")(app);            // http://localhost:3000/api/img/id_post  pour avoir une image unique 
+*/
+
+
+
 
 // point de terminaison des utilisateurs
 
 
-require('./src/routes/connexion')(app)       //    http://localhost:3000/api/login
-require('./src/routes/inscription')(app)     //    http://localhost:3000 /api/register
-require('./src/routes/create_user')(app);
-require('./src/routes/verification')(app)
+// point de terminaison des utilisateurs
 
-//point de terminaisons sur les types,villes,regions et categorie
-require('./src/routes/create_type')(app);       //    http://localhost:3000/api/type
-require('./src/routes/create_ville')(app);      //   http://localhost:3000/api/ville
 
-require('./src/routes/create_region')(app);       //   http://localhost:3000/api/region
+require('./src/routes/utilisateurs')(app)      
+ //    http://localhost:3000/api/login pour la connexion d'un utilisateur
+require('./src/routes/utilisateurs')(app)     
+//    http://localhost:3000 /api/register pour l'inscription d'un utilisateur
+require('./src/routes/utilisateurs')(app);    
+//   http://localhost:3000     /api/validation/:id/:token  pour verifier le token d'un utilisateur 
+require('./src/routes/utilisateurs')(app)    
+ //     http://localhost:3000 /api/userexist/:email pour verifier l'existence d'une adresse mail
+require('./src/routes/utilisateurs')(app)  
+  //        http://localhost:3000/api/passrecup    pour la mise ajour du mot de passe apres qu'on l'ai  recupere 
+require('./src/routes/utilisateurs')(app)     
+  //     http://localhost:3000/api/passupdate   modification du mot de passe 
+require('./src/routes/utilisateurs')(app)       
+//     http://localhost:3000/api/userupdate   mise a jour de l'utilisateur
+
+
 
 
 app.get('/', (req, res) => {

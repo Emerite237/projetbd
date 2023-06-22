@@ -38,12 +38,12 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {msg: `Merci de proposer un mot de passe valide`}
       }
     },
-    role: {
-      type: DataTypes.STRING,
+    telephone: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        notEmpty: {msg: ``},
-        notNull: {msg: ``}
+        notEmpty: {msg: `vous n'avez pas renseigner le numero de telehone`},
+        notNull: {msg: `le numero de telephone est obligatoire`}
       }
     },
     verifier: {

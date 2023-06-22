@@ -1,31 +1,32 @@
-const { post }= require('../db/sequelize')
+const { annonce }= require('../db/sequelize')
 const {ValidationError}=require('sequelize')
 const cors=require("cors")
 module.exports =(app) =>{
-    app.put('/api/post/modifier/:id', cors(),(req,res) =>
+    app.put('/api/annonce/modifier/:id', cors(),(req,res) =>
     {
         const id= req.params.id
 
-        post.update(req.body,{
-            where: {id_posts: id}
+      annonce.update(req.body,{
+            where: {id_annonces: id}
 
         })
         .then(_=>{
-          return  post.findByPk(id).then(posts => {
-                if(posts===null)
+          return annonce.findByPk(id).then(annonces => {
+                if(annonces===null)
                 {
                     
-                    const message="le posts n'existe pas "
+                    const message="le annonces n'existe pas "
                         res.status(404).json({message}) 
                     
                 }
-                const message='le posts a bien ete modifie.'
-                res.json({message,data:posts})
+                const message='le annonces a bien ete modifie.'
+                res.json({message,data:annonces})
             })
         
             }).catch(error =>{
-                const message="le posts n'a pas pue etre modifier,reesayer dans quelques instant"
+                const message="le annonces n'a pas pue etre modifier,reesayer dans quelques instant"
                 res.status(500).json({message,data: error}) 
+                console.log(error)
             }).catch(error => {
                 if(error instanceof ValidationError ){
                 return res.status(400).json({message: error.message,data: error})

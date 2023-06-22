@@ -18,6 +18,7 @@ module.exports= (server) => {
     utilisateur.prenom=req.body.prenom;
     utilisateur.email=req.body.email;
     utilisateur.pass=bcryptedpassword;
+    utilisateur.telephone=req.body.telephone
 
     utilisateurs.create(utilisateur)
     .then(utilisateurs =>{

@@ -11,15 +11,21 @@ module.exports = (sequelize,DataTypes)=> {
             autoIncrement: true
         },
 
-        id_post: {
+        id_annonce: {
             type: DataTypes.INTEGER,
             allowNull:false,
             validate: {
                 isInt: {msg:'id  est un  entier'},
-                notNull:{msg:'cette propriete est requise '}
+                notNull:{msg:'cette id est requise '}
             }
         },
-    
+        nom: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              notEmpty: {msg: 'Le nom ne doit pas être vide'},
+              notNull: {msg: 'Le nom est une propriété requise'}
+            }},
     path:{
         type: DataTypes.TEXT,
         allowNull: false,
@@ -27,8 +33,8 @@ module.exports = (sequelize,DataTypes)=> {
            msg: 'ce texte est deja pris' 
         },
         validate:{
-           isUrl:{msg:" il s'sagit d'une chaine de charactere  obligatoire"},
-            notNull:{msg: 'cette propriete est requise'}
+          
+            notNull:{msg: 'ce path est requise'}
         },
     },
      

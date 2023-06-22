@@ -1,13 +1,10 @@
 
 const userModel = require('../models/utilisateur')
-const postModel = require('../models/post')
-const typeModel = require('../models/type')
-const villeModel = require('../models/ville')
-const regionModel = require('../models/region')
-const categoriemodel=require('../models/categorie')
+const annnoceModel = require('../models/annoce_voiture')
+const modeleModel = require('../models/modele')
+
 const verificationmodel=require('../models/verification')
 var imageuploadsmodels=require('../models/imagesuploads')
-var imagemodels =require('../models/images')
 
 
 const { Sequelize, DataTypes } = require('sequelize')
@@ -23,16 +20,19 @@ const sequelize = new Sequelize('bd', 'root', '', {
 })
 
 const imagesuploads=imageuploadsmodels(sequelize,DataTypes)
- const img=imagemodels(sequelize,DataTypes)
-const post=postModel(sequelize,DataTypes)
+
+const annonce=annnoceModel(sequelize,DataTypes)
 
 const utilisateur = userModel(sequelize, DataTypes)
-const type = typeModel(sequelize, DataTypes)
-const ville = villeModel(sequelize, DataTypes)
-const region = regionModel(sequelize, DataTypes)
-const categorie=categoriemodel(sequelize,DataTypes)
-const verification=verificationmodel(sequelize,DataTypes)  
+const modele = modeleModel(sequelize, DataTypes)
 
+const verification=verificationmodel(sequelize,DataTypes)  
+/*
+
+annonce.hasOne(modele);
+modele.belongsTo(annonce);
+
+*/
 const initDb = () => {
   return sequelize.sync({force: true}).then(_ => {
     console.log('La base de donnée a bien été initialisée !')
@@ -40,47 +40,6 @@ const initDb = () => {
 }
   
 
-// Type foreign Key to posts table
-type.hasMany(post,{
-  foreignKey:'id_type',
-  as: 'type_post'
-})
-post.belongsTo(type,{
-  foreignKey: 'id_type',
-  as: 'type_post'
-})
-
-//ville foreign Key to posts table
-ville.hasMany(post,{
-  foreignKey:'id_ville',
-  as: 'ville_post'
-})
-post.belongsTo(ville,{
-  foreignKey: 'id_ville',
-  as: 'ville_post'
-})
-
-//utilisateurs foreign Key to posts table
-utilisateur.hasMany(post,{
-  foreignKey:'id_utilisateur',
-  as: 'utilisateur_post'
-})
-post.belongsTo(utilisateur,{
-  foreignKey: 'id_utilisateur',
-  as: 'utilisateur_post'
-})
-
-// Region foreign Key to villes table
-region.hasMany(ville,{
-  foreignKey:'id_ville',
-  as: 'region'
-})
-ville.belongsTo(region,{
-  foreignKey: 'id_ville',
-  as: 'region'
-})
-
-
 module.exports = { 
- sequelize,utilisateur, post, img, type, ville, region,categorie,verification,imagesuploads
+ sequelize,utilisateur,annonce,verification,imagesuploads,modele
 }

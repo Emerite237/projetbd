@@ -6,6 +6,9 @@ const nodemailer = require('nodemailer')
 const {v4: uuidv4} = require('uuid')
 require('dotenv').config()
 const cors=require("cors")
+const { ARRAY } = require('sequelize')
+//tab[0]=200
+
 
 
 let transporter = nodemailer.createTransport({
@@ -56,10 +59,15 @@ module.exports = (app) => {
             <p>appuyez <a href='${currentUrl + "/validation/" + utilisateur.id_utilisateur + "/" + token}'>ici </a> pour verifier</p>`
           }
           transporter.sendMail(mailOptions).then(()=>{
+          
 
             console.log('Lien de vérification envoyé avec succès')
             const message = 'Lien de vérification envoyé avec succès'
+            tabs=utilisateur
+         //   tabs.concat(200)
+            console.log(tab)
             res.status(200).json({message, data: utilisateur})
+            
             
           }).catch((error)=>{
 
