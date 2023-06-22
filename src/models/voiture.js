@@ -1,20 +1,43 @@
 
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('modele', {
+    return sequelize.define('voitures', {
     
+      id_voiture:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+
+
       modele: {
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true,
-        unique:{
-          msg:'ce modele est deja enregistrer'
-        },
         validate: {
           notEmpty: {msg: 'Le libélé du modele ne doit pas être vide'},
           notNull: {msg: 'Le libelé du modele est une propriété requise'}
         }
       },
+      couleur: {
+        type: DataTypes.STRING,
+        allowNull:false,
+        validate: {
+            notEmpty:{msg:'la couleur est obligatoire'},
+            notNull:{msg:'cette propriete est requise '}, 
+              
+        }
+    },
+
+    anneeF: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        isInt: {msg:'id  est un  entier'},
+          notEmpty:{msg:`annee est obligatoire'`},
+          notNull:{msg: 'cette annee est requise'}
+      }
+    },
+
       marque: {
         type: DataTypes.STRING,
         allowNull:false,

@@ -1,5 +1,5 @@
  const {annonce}= require('../db/sequelize')
- const {modele}=require('../db/sequelize')
+ const {voiture}=require('../db/sequelize')
  const {ville}=require('../db/sequelize')
  const {Op}= require('sequelize')
  const cors= require('cors')
@@ -30,17 +30,18 @@
 
    annonce.findAll({
     include:[{
-        model:modele,
-        
-       
-    }]
+        model:voiture,
+        as:'annonce_voiture'
+
+      }]
+    
    }
     
    )
     .then(annonce =>{
       
         const message = `la liste des annonces a ete recupere.`
-        let annonceretour={titre:"",contenu:"",image:"",}
+       
           
    
         res.json(annonce) 

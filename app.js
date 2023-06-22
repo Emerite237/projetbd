@@ -16,7 +16,7 @@ const app =express()
 const port = 3000
 const oneDay = 1000 * 60 * 60 * 24 
 //synchronisation a la base de donnee embarque
-sequelize.sync({force:true}).then( ()=>console.log('base de donnée pret'));
+sequelize.sync({force:false}).then( ()=>console.log('base de donnée pret'));
 
 //session middleware
 
@@ -48,8 +48,10 @@ require("./src/routes/findbypk")(app)        /* http://localhost:3000/api/post/?
 require('./src/routes/create_annonce')(app);    //    http://localhost:3000/api/annonce/:id    id c'est  celui de utilisateur  cette route permet de cree une annoce de voiture
 
                                               
-require('./src/routes/create_modele')(app);    //    http://localhost:3000/api/modele   permet de cree un modele de voiture 
+require('./src/routes/create_voiture')(app);    //    http://localhost:3000/api/voiture   permet de cree un modele de voiture 
 
+
+require('./src/routes/findall_voiture')(app)    //      http://localhost:3000/api/findall/voiture   pour afficher toutes les modeles
 
 require('./src/routes/update_annonce')(app);    //    http://localhost:3000/api/annonce/modifier/:id  pour modifier une annnonces
 

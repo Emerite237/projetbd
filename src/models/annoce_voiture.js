@@ -9,7 +9,15 @@ module.exports = (sequelize,DataTypes)=> {
             primaryKey: true,
             autoIncrement: true
         },
-    
+        titre:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate:{
+                notEmpty:{msg:'le titre est obligatoire'},
+                notNull:{msg: 'cette propriete est requise'}
+            }
+        },
+       
      description:{
             type: DataTypes.STRING,
             allowNull: false,
@@ -18,15 +26,7 @@ module.exports = (sequelize,DataTypes)=> {
                 notNull:{msg: 'cette propriete est requise'}
             }
         },
-        couleur: {
-            type: DataTypes.STRING,
-            allowNull:false,
-            validate: {
-                notEmpty:{msg:'la couleur est obligatoire'},
-                notNull:{msg:'cette propriete est requise '}, 
-                  
-            }
-        },
+       
        
       
 
@@ -53,7 +53,7 @@ module.exports = (sequelize,DataTypes)=> {
         },
       
        
-        modele: {
+       /* annonce_modele: {
             type: DataTypes.STRING,
             allowNull:false,
             validate: {
@@ -61,18 +61,19 @@ module.exports = (sequelize,DataTypes)=> {
                 notNull:{msg:'le modele  propriete est requise '}, 
                   
             }
-        },  
-        anneeF: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          validate:{
-            isInt: {msg:'id  est un  entier'},
-              notEmpty:{msg:`annee est obligatoire'`},
-              notNull:{msg: 'cette annee est requise'}
-          }
-        },
+        },  */
+        
         
         id_utilisateur:{
+            type: DataTypes.INTEGER,
+            allowNull:false,
+            validate: {
+                isInt: {msg:'id  est un  entier'},
+                notNull:{msg:'cette propriete est requise '}
+            }
+
+        }, 
+        id_voiture:{
             type: DataTypes.INTEGER,
             allowNull:false,
             validate: {

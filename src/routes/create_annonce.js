@@ -1,4 +1,7 @@
 const {annonce}= require('../db/sequelize')
+const {voiture}= require('../db/sequelize')
+
+
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const annonces=require('../models/annoce_voiture')
@@ -6,15 +9,24 @@ const cors= require('cors')
 
 
 module.exports= (server) => {
-   server.post('/api/annonce/:id',cors(), (req,res)=>{
+   server.post('/api/annonce/:id',cors(), async(req,res)=>{
+
     
+    
+    var c=  await voiture.count();
+
+    
+    
+  console.log(c)
     annonces.modele=req.body.modele
     annonces.description=req.body.description
+    annonces.titre=req.body.titre
     annonces.kilometrage=req.body.kilometrage
-    annonces.couleur=req.body.couleur
+    annonces.id_voiture=c
     annonces.prix=req.body.prix
-    annonces.anneeF=req.body.anneeF
+
     annonces.id_utilisateur= req.params.id
+    
    
   
       annonce.create(annonces)
@@ -32,7 +44,7 @@ module.exports= (server) => {
        }
        const message="le annonce n'a pas pue etre ajouter"
        res.status(500).json({message, data:error})
-      
+      console.log(error)
        
     })
     })

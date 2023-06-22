@@ -1,7 +1,7 @@
 
 const userModel = require('../models/utilisateur')
 const annnoceModel = require('../models/annoce_voiture')
-const modeleModel = require('../models/modele')
+const voitureModel = require('../models/voiture')
 
 const verificationmodel=require('../models/verification')
 var imageuploadsmodels=require('../models/imagesuploads')
@@ -16,7 +16,7 @@ const sequelize = new Sequelize('bd', 'root', '', {
   dialectOptions: {
     timezone: 'Etc/GMT-2',
   },
-  logging: false
+  logging:true
 })
 
 const imagesuploads=imageuploadsmodels(sequelize,DataTypes)
@@ -24,13 +24,33 @@ const imagesuploads=imageuploadsmodels(sequelize,DataTypes)
 const annonce=annnoceModel(sequelize,DataTypes)
 
 const utilisateur = userModel(sequelize, DataTypes)
-const modele = modeleModel(sequelize, DataTypes)
+const voiture = voitureModel(sequelize, DataTypes)
 
 const verification=verificationmodel(sequelize,DataTypes)  
+
+voiture.hasOne(annonce,{
+  foreignKey:'id_voiture',
+  as: 'annonce_voiture'
+})
+annonce.belongsTo(voiture,{
+  foreignKey: 'id_voiture',
+  as: 'annonce_voiture'
+})
 /*
 
-annonce.hasOne(modele);
-modele.belongsTo(annonce);
+
+// Type foreign Key to posts table
+voiture.hasOne(annonce,{
+  foreignKey:'voiture',
+  as: 'annonce_voiture'
+})
+annonce.belongsTo(voiture,{
+  foreignKey: 'voiture',
+  as: ''
+})
+
+annonce.hasOne(voiture);
+voiture.belongsTo(annonce);
 
 */
 const initDb = () => {
@@ -41,5 +61,5 @@ const initDb = () => {
   
 
 module.exports = { 
- sequelize,utilisateur,annonce,verification,imagesuploads,modele
+ sequelize,utilisateur,annonce,verification,imagesuploads,voiture
 }
