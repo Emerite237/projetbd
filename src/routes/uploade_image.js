@@ -3,12 +3,15 @@ const {annonce}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const image=require("../models/imagesuploads")
+var annonces=require("../models/annoce_voiture")
 const path= require("path")
 const multer =require("multer");
 
 const cors= require("cors")
 
  var images = new Array()
+
+ var tab=[]
 
 const uploadDir = path.join(__dirname, './public/data');
 //const imagePath = path.join(uploadDir, 'uploads', `${filename}.jpg`);
@@ -51,17 +54,25 @@ const storage =multer.diskStorage({
 
 module.exports= (server) => {
   
-  var c=10
+  var c=0
   server.post('/api/upload',upload,cors(),async (req,res)=>{
     //const extention= MIME_TYPES[file.mimetype]
 
-     var c=  await annonce.count();
+     tab= await annonce.findAll();
 
-     c=c+1;
-    console.log(req.files)
+     var c=tab.length
+
+     if(c==0){
+      annonce.id_annonce=1
+     }else{ c=c-1;}
+    
+
+     annonces=tab[c]
+
+    console.log(annonces)
     
      
-      image.id_annonce=parseInt(c)
+      image.id_annonce=parseInt(annonces.id_annonces)
       var paths = req.files.map(file => file.path);
       var noms = req.files.map(file => file.filename);
 
@@ -70,7 +81,7 @@ var newpaths =  await paths.map(function(path) {
   return path.replace(/\\/g, "/");
 })
 
-var files= req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_annonce:c,nom:file.filename}));
+var files= req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_annonce:annonces.id_annonces,nom:file.filename}));
       console.log(paths)
       console.log(noms)
       console.log(files)

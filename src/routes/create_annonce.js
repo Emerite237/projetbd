@@ -5,7 +5,7 @@ const {voiture}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 const annonces=require('../models/annoce_voiture')
-const voitures=require('../models/annoce_voiture')
+var voitures=require('../models/annoce_voiture')
 const cors= require('cors')
 
 tab=[]
@@ -15,18 +15,18 @@ module.exports= (server) => {
 
     
     tab= await voiture.findAll()
-
-    voiture=tab[tab.length]
+    c=tab.length-1
+    voitures=tab[c]
 
     
     
-  console.log(voiture.id_voiture)
+  console.log(voitures.id_voiture)
     annonces.modele=req.body.modele
     annonces.adresse=req.body.adresse
     annonces.description=req.body.description
     annonces.titre=req.body.titre
     annonces.kilometrage=req.body.kilometrage
-    annonces.id_voiture=c
+    annonces.id_voiture=voitures.id_voiture
     annonces.prix=req.body.prix
 
     annonces.id_utilisateur= req.params.id
