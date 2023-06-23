@@ -4,9 +4,9 @@ const {voiture} = require('../db/sequelize')
 
 
 module.exports= (server) => {
-   server.get('/api/annonce/:id',cors(),async(req,res)=>{
+   server.get('/api/annonce/utilisateur/:id',cors(),async(req,res)=>{
 
-    annonce.findOne({
+    annonce.findAll({
        include:[{
          model:voiture,
          as:'annonce_voiture',
@@ -15,7 +15,7 @@ module.exports= (server) => {
       
      ],
        where: {
-      id_annonces: req.params.id}
+      id_utilisateur: req.params.id}
    })
        .then(annonces => {
          const message = 'La liste des annonces a bien été récupérée.'

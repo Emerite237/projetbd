@@ -10,7 +10,6 @@ module.exports= (server) => {
 
 
     
-    voitures.voiture=req.body.voiture
     voitures.marque=req.body.marque
     voitures.couleur= req.body.couleur
     voitures.modele=req.body.modele

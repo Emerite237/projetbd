@@ -17,6 +17,15 @@ module.exports = (sequelize,DataTypes)=> {
                 notNull:{msg: 'cette propriete est requise'}
             }
         },
+
+       adresse:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate:{
+                notEmpty:{msg:'adresse est obligatoire'},
+                notNull:{msg: 'cette adresse est requise'}
+            }
+        },
        
      description:{
             type: DataTypes.STRING,

@@ -19,6 +19,7 @@ module.exports= (server) => {
     
   console.log(c)
     annonces.modele=req.body.modele
+    annonces.adresse=req.body.adresse
     annonces.description=req.body.description
     annonces.titre=req.body.titre
     annonces.kilometrage=req.body.kilometrage

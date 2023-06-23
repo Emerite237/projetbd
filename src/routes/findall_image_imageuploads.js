@@ -1,12 +1,8 @@
 const {imagesuploads}= require('../db/sequelize')
-const {img}= require('../db/sequelize')
 const {Op}= require('sequelize')
 const cors= require('cors')
 module.exports= (server) => {
-
-    tab=[]
-    tabs=[]
-   server.get('/api/image_imagesuploads',cors(),  async(req,res)=>{
+   server.get('/api/imagesuploads',cors(), (req,res)=>{
        if(req.query.lib_imagesuploads){
            const lib_imagesuploads=req.query.lib_imagesuploads
            return imagesuploads.findAll({
@@ -22,39 +18,15 @@ module.exports= (server) => {
            })
        }
 
-     tabs=  img.findAll()
-       .then(img =>{
-           
-           tabs=img;
-           console.log(tabs)
-         
-       }
-       )
 
-
-    tab=   imagesuploads.findAll()
+       imagesuploads.findAll()
        .then(imagesuploads =>{
            const message = `la liste des imagesuploadss a ete recupere.`
-           tab=imagesuploads;
-           console.log(tab)
-         //  res.json({message,data: imagesuploads}) 
-
-           
-   tab=tab.concat(tabs)
-
-       console.log(tab)
-
-       res.json(tab)
-
+           res.json({message,data: imagesuploads}) 
        })
        .catch (error =>{
            const message="la liste des imagesuploads n'a pas ete recupere,reesayer dans quelques instant"
            res.status(500).json({message,data: error}) 
        })
-
-      
-      
-
-     
    }) 
 }

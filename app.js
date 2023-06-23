@@ -42,7 +42,7 @@ methods:"GET,POST,HEAD,PUSH,DELETE,PATCH" }));
 
 
 // point de terminaison des publication
-require("./src/routes/findbypk")(app)        /* http://localhost:3000/api/post/?id=1   a la place du 1 tu peux mettre n'importe quel id    */ 
+require("./src/routes/findbypk")(app)        /* q   a la place du 1 tu peux mettre n'importe quel id    */ 
 
                                                
 require('./src/routes/create_annonce')(app);    //    http://localhost:3000/api/annonce/:id    id c'est  celui de utilisateur  cette route permet de cree une annoce de voiture
@@ -64,14 +64,23 @@ require('./src/routes/supprimer_annonce')(app);    //    http://localhost:3000/a
 
 require("./src/routes/uploade_image")(app);       //http://localhost:3000/api/upload   pour uploader des images
 
+require('./src/routes/findall_image_imageuploads')(app);  // afficher a la fois les images present dans le serveur et celle qui ont des url  http://localhost:3000/api/imagesuploads
 
 
+require("./src/routes/findbypk_images_uploads")(app);  // http://localhost:3000//api/findbypk/image_imagesuploads/id   id de l'annonce
+
+
+require('./src/routes/findall_annonce_utilisateur')(app) //  http://localhost:3000/api/annonce/utilisateur/:id   pour avoir les annonces d'un utilisateur
 
   require('./src/routes/findall_annonce')(app)    /*   http://localhost:3000/api/findall/annonce   pour afficher toutes les annoces
                                                 
                                                     http://localhost:3000/api/findall/post?titre=le titre du site rechercher    pour des recherches plus precise
  
+*/
 
+require('./src/routes/findall_utilisateur')(app)    /*   http://localhost:3000/api/findall/utilisateur   pour afficher toutes les annoces
+
+/*
 require('./src/routes/recherche')(app);         //    http://localhost:3000/api/search/:word
 // point de terminaison des images 
 
@@ -85,7 +94,6 @@ require('./src/routes/supprimer_image')(app);
 require('./src/routes/findall_image_imageuploads')(app);  // afficher a la fois les images present dans le serveur et celle qui ont des url  http://localhost:3000/api/image_imagesuploads
 
 
-require("./src/routes/findbypk_images_uploads")(app);  // http://localhost:3000//api/findbypk/image_imagesuploads/id_post
 require("./src/routes/findpk_images")(app);            // http://localhost:3000/api/img/id_post  pour avoir une image unique 
 */
 

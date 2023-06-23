@@ -16,7 +16,7 @@ const sequelize = new Sequelize('bd', 'root', '', {
   dialectOptions: {
     timezone: 'Etc/GMT-2',
   },
-  logging:true
+  logging:false
 })
 
 const imagesuploads=imageuploadsmodels(sequelize,DataTypes)
@@ -30,11 +30,15 @@ const verification=verificationmodel(sequelize,DataTypes)
 
 voiture.hasOne(annonce,{
   foreignKey:'id_voiture',
-  as: 'annonce_voiture'
+  as: 'annonce_voiture',
+  onDelete:'CASCADE',
+ 
 })
 annonce.belongsTo(voiture,{
   foreignKey: 'id_voiture',
-  as: 'annonce_voiture'
+  as: 'annonce_voiture',
+  onDelete: 'CASCADE',
+  hooks:true
 })
 /*
 
