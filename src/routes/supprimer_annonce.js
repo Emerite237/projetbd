@@ -3,7 +3,9 @@ const cors=require("cors")
 
 module.exports = (app)=>{
     app.delete('/api/annonce/supprimer/:id', cors(),(req,res)=>{
-        annonce.findByPk(req.params.id)
+        annonce.findOne({ where: {
+            id_annonces: req.params.id}}
+         )
         .then(annonce => {
             if(annonce===null){
                 

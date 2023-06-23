@@ -6,7 +6,7 @@ module.exports= (server) => {
 
     tab=[]
    
-   server.get('/api/findbypk/image_imagesuploads/:id',cors(),  async(req,res)=>{
+   server.get('/api/findone/image_imagesuploads/:id',cors(),  async(req,res)=>{
      
 
 

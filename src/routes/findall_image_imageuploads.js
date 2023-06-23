@@ -14,7 +14,7 @@ module.exports= (server) => {
        })
            .then(imagesuploads =>{
                const message= "l'element a bien ete retrouve"
-               res.json({message,data:imagesuploads})
+               res.json(imagesuploads)
            })
        }
 
@@ -29,4 +29,18 @@ module.exports= (server) => {
            res.status(500).json({message,data: error}) 
        })
    }) 
+
+
+   server.get('/api/imagesuploads/:id',cors(), (req,res)=>{
+  
+        return imagesuploads.findAll({
+            where: {
+                id_annonce: req.params.id}
+       
+    })
+        .then(imagesuploads =>{
+            const message= "l'element a bien ete retrouve"
+            res.json(imagesuploads)
+        })
+    })
 }
