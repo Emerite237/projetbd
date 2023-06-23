@@ -6,44 +6,6 @@
  const auth= require('../auth/isAuth')
 
 
- 
-
- module.exports= (server) => {
-    server.get('/api/findall/annonce/:id',/* auth,*/cors(),async(req,res,next)=>{  
-        
-        
-    
-        annonce.findAll({
-            include:[{
-              model:voiture,
-              as:'annonce_voiture',
-             
-            },
-           
-          ],
-            where: {
-           id_utilisateur: req.params.id}
-        })
-    .then(annonce =>{
-      
-        const message = `la liste des annonces a ete recupere.`
-       
-          
-   
-        res.json(annonce) 
-        
-    })
-    .catch (error =>{
-        const message="la liste des annonce n'a pas ete recupere,reesayer dans quelques instant"
-        res.status(500).json({message,data: error}) 
-        console.log(error)
-    })
-}) }
-
-
-
-
-
 
  module.exports= (server) => {
     server.get('/api/findall/annonce',/* auth,*/cors(),async(req,res,next)=>{  
